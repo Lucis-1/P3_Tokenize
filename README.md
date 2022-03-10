@@ -1,7 +1,7 @@
 # P3_Tokenize
 
 
-## Monday Tasks:
+## 2022 03 14 - Monday Tasks:
 Solidity Daniel : Code the NFT code for real estate
 
 Python Streamlit Lucis : Barebones app
