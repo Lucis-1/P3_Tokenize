@@ -16,15 +16,15 @@ contract EthBNB {
     string bnb;
     address last_to_deposit;
     uint256 last_deposit_amount;
-    uint256 fee;
     uint256 public balance;
     address last_to_withdraw;
     uint256 last_withdraw_amount;
     address contract_owner;
+    uint fee;
 
-    function pay(address payable recipient) public payable {
+    function pay(address payable recipient, uint amount) public payable {
         require(recipient == bnb_owner, "wrong account");
-        require(msg.value == fee,"wrong amount paid");
+        require(amount == fee,"wrong amount paid");
         if (last_to_deposit !=msg.sender) {
             last_to_deposit = msg.sender; 
         }
