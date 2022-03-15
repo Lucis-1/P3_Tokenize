@@ -46,15 +46,17 @@ from datetime import datetime, date, time
 from crypto_wallet import generate_account, get_balance, send_transaction
 
 ################################################################################
-# Fintech Finder Candidate Information
+# Property Finder Information
+st.session_state.booked_dates = []
 
-# Database of Fintech Finder candidates including their name, digital address, rating and hourly cost per Ether.
+# Database of Property Finder candidates including their name, digital address, rating and hourly cost per Ether.
 # A single Ether is currently valued at $1,500
 property_database = {
-    "Property1": ["Property1", "0xaC8eB8B2ed5C4a0fC41a84Ee4950F417f67029F0", "4 Bed, 2 Bath", .40, "Images/Property1.jpeg"],
-    "Property2": ["Property2", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", .33, "Images/Property2.jpeg"],
-    "Property3": ["Property3", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", .20, "Images/Property3.jpeg"],
-    "Property4": ["Property4", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", .15, "Images/Property4.jpeg"]
+    "Property1": ["Property1", "0xaC8eB8B2ed5C4a0fC41a84Ee4950F417f67029F0", "4 Bed, 2 Bath", .40, "Images/Property1.jpeg", "Images/Map1.jpeg"],
+    "Property2": ["Property2", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", .33, "Images/Property2.jpeg", "Images/Map2.jpeg"],
+    "Property3": ["Property3", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", .20, "Images/Property3.jpeg", "Images/Map3.jpeg"],
+    "Property4": ["Property4", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", .15, "Images/Property4.jpeg", "Images/Map4.jpeg"]
+
 } #Change image
 
 # A list of the properties
@@ -89,7 +91,7 @@ st.sidebar.markdown("## Client Account Address and Ethernet Balance in Ether")
 ##########################################
 # Step 1 - Part 4:
 # Create a variable named `account`. Set this variable equal to a call on the
-# `generate_account` function. This function will create the Fintech Finder
+# `generate_account` function. This function will create the Property Finder
 # customer’s (in this case, your) HD wallet and Ethereum account.
 
 # @TODO:
@@ -115,7 +117,7 @@ st.sidebar.write("Ethereum Account:", get_balance(w3, account.address))
 
 ##########################################
 
-# Create a select box to choose a FinTech Hire candidate
+# Create a select box to choose a Property Hire
 property = st.sidebar.selectbox('Select a Property', properties)
 
 # Create a select box to choose date of stay
@@ -166,13 +168,20 @@ st.sidebar.write("Total cost for days booked:",wage)
 ##########################################
 # Step 2 - Part 2:
 
+
+
 if st.sidebar.button("Send Transaction"):
-    booked_dates = []
+    #st.sidebar.write("#### Date already taken!")   
+    #st.sidebar.write(datesMemory)
+    #st.sidebar.write(type(str(datesMemory)))
+
+
     # If loop for dates
-    if datesMemory in booked_dates:
-        st.sidebar.markdown("#### Date already taken!")
+    if datesMemory in st.session_state.booked_dates:
+        st.warning(f'The date "{datesMemory}" is already booked!')
     else:
-        booked_dates.append(datesMemory)
+        st.session_state.booked_dates.append(datesMemory)
+
     # @TODO
     # Call the `send_transaction` function and pass it 3 parameters:
     # Your `account`, the `property_address`, and the `wage` as parameters
@@ -187,7 +196,7 @@ if st.sidebar.button("Send Transaction"):
     st.sidebar.write(transaction_hash)
 
     # Celebrate your successful payment
-    st.balloons()
+    #st.balloons()
 
 # The function that starts the Streamlit application
 # Writes property locations to the Streamlit page
