@@ -173,7 +173,6 @@ if st.sidebar.button("Send Transaction"):
         st.sidebar.markdown("#### Date already taken!")
     else:
         booked_dates.append(datesMemory)
-
     # @TODO
     # Call the `send_transaction` function and pass it 3 parameters:
     # Your `account`, the `property_address`, and the `wage` as parameters
