@@ -21,11 +21,13 @@
 
 ################################################################################
 # Imports
+from sqlite3 import DateFromTicks
 import streamlit as st
 from dataclasses import dataclass
 from typing import Any, List
 from web3 import Web3
 w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
+from datetime import datetime, date, time
 ################################################################################
 # Step 1:
 # Import Ethereum Transaction Functions into the Property Finder Application
@@ -113,11 +115,15 @@ st.sidebar.write("Ethereum Account:", get_balance(w3, account.address))
 
 ##########################################
 
-# Create a select box to chose a FinTech Hire candidate
+# Create a select box to choose a FinTech Hire candidate
 property = st.sidebar.selectbox('Select a Property', properties)
 
+# Create a select box to choose date of stay
+Book = 'Date of Booking'
+datesMemory = st.sidebar.date_input(label=Book)
+
 # Create a input field to record the number of days the candidate worked
-days = st.sidebar.number_input("Number of Days")
+days = st.sidebar.number_input("Number of Days", step=1)
 
 st.sidebar.markdown("## Property Location, Rate, and Ethereum Address")
 
@@ -161,6 +167,12 @@ st.sidebar.write("Total cost for days booked:",wage)
 # Step 2 - Part 2:
 
 if st.sidebar.button("Send Transaction"):
+    booked_dates = []
+    # If loop for dates
+    if datesMemory in booked_dates:
+        st.sidebar.markdown("#### Date already taken!")
+    else:
+        booked_dates.append(datesMemory)
 
     # @TODO
     # Call the `send_transaction` function and pass it 3 parameters:
