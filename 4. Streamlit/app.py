@@ -1,17 +1,16 @@
-# Cryptocurrency Wallet
+# PROPERTY FINDER Stremlit
 
 ################################################################################
-# This code will assume the perspective of a House Finder to lease
-# customer in order to do the following:
+# This code will assume the perspective of a Property Finder for customers
+# in order to do the following:
 
 # * Generate a new Ethereum account instance by using your mnemonic seed phrase
-# (which you created earlier in the module).
 
 # * Fetch and display the account balance associated with your Ethereum account
 # address.
 
 # * Calculate the total value of an Ethereum transaction, including the gas
-# estimate, that pays a property owner for leasing their place.
+# estimate, that pays a property owner for leasing ###### their place.
 
 # * Digitally sign a transaction that pays a property owner, and send
 # this transaction to the Ganache blockchain.
@@ -27,13 +26,12 @@ from dataclasses import dataclass
 from typing import Any, List
 from web3 import Web3
 w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
+from PIL import Image
 from datetime import datetime, date, time
 ################################################################################
 # Step 1:
 # Import Ethereum Transaction Functions into the Property Finder Application
 
-################################################################################
-# Step 1 - Part 3:
 # Import the following functions from the `crypto_wallet.py` file:
 # * `generate_account`
 # * `get_balance`
@@ -42,26 +40,26 @@ from datetime import datetime, date, time
 # @TODO:
 # From `crypto_wallet.py import the functions generate_account, get_balance,
 #  and send_transaction
-# YOUR CODE HERE
 from crypto_wallet import generate_account, get_balance, send_transaction
 
 ################################################################################
+# Step 2:
 # Property Finder Information
 st.session_state.booked_dates = []
 
-# Database of Property Finder candidates including their name, digital address, rating and hourly cost per Ether.
-# A single Ether is currently valued at $1,500
+# Database of Property Finder candidates including their name, digital address, rating and cost per Ether.
 property_database = {
-    "Property1": ["Property1", "0xaC8eB8B2ed5C4a0fC41a84Ee4950F417f67029F0", "4 Bed, 2 Bath", .40, "Images/Property1.jpeg", "Images/Map1.jpeg"],
-    "Property2": ["Property2", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", .33, "Images/Property2.jpeg", "Images/Map2.jpeg"],
-    "Property3": ["Property3", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", .20, "Images/Property3.jpeg", "Images/Map3.jpeg"],
-    "Property4": ["Property4", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", .15, "Images/Property4.jpeg", "Images/Map4.jpeg"]
-
-} #Change image
-
+    "Property1": ["Property1 - Anza Vista (Rent)", "0xaC8eB8B2ed5C4a0fC41a84Ee4950F417f67029F0", "4 Bed, 2 Bath", .40, "Images/Property1.jpeg"],
+    "Property2": ["Property2 - Bay View (Rent)", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", .33, "Images/Property2.jpeg"],
+    "Property3": ["Property3 - Beuna Vista Park (Rent)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", .20, "Images/Property3.jpeg"],
+    "Property4": ["Property4 - Claredon Heights (Rent)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", .15, "Images/Property4.jpeg"],
+    "Property5": ["Property1 - Corona Heights (Buy)", "0xaC8eB8B2ed5C4a0fC41a84Ee4950F417f67029F0", "4 Bed, 2 Bath", 9.40, "Images/Property5.jpeg"],
+    "Property6": ["Property2 - Cow Hollow (Buy)", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", 9.01, "Images/Property6.jpeg"],
+    "Property7": ["Property3 - Diamond Heights (Buy)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", 8.20, "Images/Property7.jpeg"],
+    "Property8": ["Property4 - Duboce Triangle (Buy)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", 7.15, "Images/Property8.jpeg"]
+}
 # A list of the properties
-properties = ["Property1", "Property2", "Property3", "Property4"]
-
+properties = ["Property1", "Property2", "Property3", "Property4", "Property5", "Property6", "Property7", "Property8"]
 
 def get_properties():
     """Display the database of Property information."""
@@ -72,30 +70,31 @@ def get_properties():
         st.write("Name: ", db_list[number][0])
         st.write("Ethereum Account Address: ", db_list[number][1])
         st.write("Property Specifications: ", db_list[number][2])
-        st.write("Daily Rate per Ether: ", db_list[number][3], "eth")
+        st.write("Rate per Ether: ", db_list[number][3], "eth")
         st.text(" \n")
 
 ################################################################################
+# Step 3:
 # Streamlit Code
 
 # Streamlit application headings
 st.markdown("# Property Finder!")
 st.markdown("## Rent a Property!")
+image = Image.open('./Images/AreaImage.png')
+st.image(image, caption='The San Francisco Area')
 st.text(" \n")
 
-################################################################################
 # Streamlit Sidebar Code - Start
-
 st.sidebar.markdown("## Client Account Address and Ethernet Balance in Ether")
 
 ##########################################
-# Step 1 - Part 4:
-# Create a variable named `account`. Set this variable equal to a call on the
+# Step 4:
+# Create a variable named `account`. Sets this variable equal to a call on the
 # `generate_account` function. This function will create the Property Finder
 # customer’s (in this case, your) HD wallet and Ethereum account.
 
 # @TODO:
-#  Call the `generate_account` function and save it as the variable `account`
+# Call the `generate_account` function and save it as the variable `account`
 account = generate_account()
 
 ##########################################
@@ -104,7 +103,7 @@ account = generate_account()
 st.sidebar.write(account.address)
 
 ##########################################
-# Step 1 - Part 5:
+# Step 5:
 # Define a new `st.sidebar.write` function that will display the balance of the
 # customer’s account. Inside this function, call the `get_balance` function and
 #  pass it your Ethereum `account.address`.
@@ -112,7 +111,6 @@ st.sidebar.write(account.address)
 # @TODO
 # Call `get_balance` function and pass it your account address
 # Write the returned ether balance to the sidebar
-# YOUR CODE HERE
 st.sidebar.write("Ethereum Account:", get_balance(w3, account.address))
 
 ##########################################
@@ -151,30 +149,22 @@ st.sidebar.write(property_wallet_address)
 st.sidebar.markdown("## Total cost to lease in Ether")
 
 ################################################################################
-# Step 2: Sign and Execute a Payment Transaction
+# Step 6: Sign and Execute a Payment Transaction
 
 # @TODO
 # Calculate total `wage` for the property by multiplying the property's hourly
 # rate from the properties database (`property_database[property][3]`) by the
 # value of the `days` variable
-# YOUR CODE HERE
 wage =property_database[property][3] * days
 
 # @TODO
 # Write the `wage` calculation to the Streamlit sidebar
-# YOUR CODE HERE
 st.sidebar.write("Total cost for days booked:",wage)
 
 ##########################################
-# Step 2 - Part 2:
-
-
+# Step 7:
 
 if st.sidebar.button("Send Transaction"):
-    #st.sidebar.write("#### Date already taken!")   
-    #st.sidebar.write(datesMemory)
-    #st.sidebar.write(type(str(datesMemory)))
-
 
     # If loop for dates
     if datesMemory in st.session_state.booked_dates:
@@ -186,7 +176,6 @@ if st.sidebar.button("Send Transaction"):
     # Call the `send_transaction` function and pass it 3 parameters:
     # Your `account`, the `property_address`, and the `wage` as parameters
     # Save the returned transaction hash as a variable named `transaction_hash`
-    # YOUR CODE HERE
     transaction_hash = send_transaction(w3, account=account,to=property_wallet_address,wage=wage)
     
     # Markdown for the transaction hash
@@ -196,7 +185,7 @@ if st.sidebar.button("Send Transaction"):
     st.sidebar.write(transaction_hash)
 
     # Celebrate your successful payment
-    #st.balloons()
+    st.balloons()
 
 # The function that starts the Streamlit application
 # Writes property locations to the Streamlit page
