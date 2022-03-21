@@ -71,7 +71,7 @@ def get_properties():
         st.write("Ethereum Account Address: ", db_list[number][1])
         st.write("Property Specifications: ", db_list[number][2])
         st.write("Rate per Ether: ", db_list[number][3], "eth")
-        st.text("=============================================================")
+        st.text("=================================================================")
         st.text(" \n")
 
 ################################################################################
