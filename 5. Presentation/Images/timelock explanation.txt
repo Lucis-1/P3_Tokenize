@@ -1,0 +1,4 @@
+adds a timelock to the withdraw function of the smart contract. This prevents the withdraw function from functioning UNLESS the timelock has passed.
+This is a security protocol to prevent smart contract exploitation.
+In future the use of the ownable library from "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol" 
+could also be used so that the owner of the smart contract is the only one that can access the withdraw function.
