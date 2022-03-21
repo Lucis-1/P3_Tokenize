@@ -66,7 +66,7 @@ def get_properties():
     db_list = list(property_database.values())
 
     for number in range(len(properties)):
-        st.image(db_list[number][4], width=200)
+        st.image(db_list[number][4])
         st.write("Name: ", db_list[number][0])
         st.write("Ethereum Account Address: ", db_list[number][1])
         st.write("Property Specifications: ", db_list[number][2])
