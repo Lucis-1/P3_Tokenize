@@ -25,8 +25,8 @@ import streamlit as st
 from dataclasses import dataclass
 from typing import Any, List
 from web3 import Web3
-w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
 from PIL import Image
+w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
 from datetime import datetime, date, time
 ################################################################################
 # Step 1:
@@ -53,10 +53,10 @@ property_database = {
     "Property2": ["Property2 - Bay View (Rent)", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", .33, "Images/Property2.jpeg"],
     "Property3": ["Property3 - Beuna Vista Park (Rent)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", .20, "Images/Property3.jpeg"],
     "Property4": ["Property4 - Claredon Heights (Rent)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", .15, "Images/Property4.jpeg"],
-    "Property5": ["Property1 - Corona Heights (Buy)", "0xaC8eB8B2ed5C4a0fC41a84Ee4950F417f67029F0", "4 Bed, 2 Bath", 9.40, "Images/Property5.jpeg"],
-    "Property6": ["Property2 - Cow Hollow (Buy)", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", 9.01, "Images/Property6.jpeg"],
-    "Property7": ["Property3 - Diamond Heights (Buy)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", 8.20, "Images/Property7.jpeg"],
-    "Property8": ["Property4 - Duboce Triangle (Buy)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", 7.15, "Images/Property8.jpeg"]
+    "Property5": ["Property5 - Corona Heights (Buy)", "0xaC8eB8B2ed5C4a0fC41a84Ee4950F417f67029F0", "4 Bed, 2 Bath", 9.40, "Images/Property5.jpeg"],
+    "Property6": ["Property6 - Cow Hollow (Buy)", "0x2422858F9C4480c2724A309D58Ffd7Ac8bF65396", "3 Bed, 2 Bath", 9.01, "Images/Property6.jpeg"],
+    "Property7": ["Property7 - Diamond Heights (Buy)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "2 Bed, 1 Bath", 8.20, "Images/Property7.jpeg"],
+    "Property8": ["Property8 - Duboce Triangle (Buy)", "0x8fD00f170FDf3772C5ebdCD90bF257316c69BA45", "1 Bed, 1 Bath", 7.15, "Images/Property8.jpeg"]
 }
 # A list of the properties
 properties = ["Property1", "Property2", "Property3", "Property4", "Property5", "Property6", "Property7", "Property8"]
@@ -66,11 +66,12 @@ def get_properties():
     db_list = list(property_database.values())
 
     for number in range(len(properties)):
-        st.image(db_list[number][4], width=200)
+        st.image(db_list[number][4])
         st.write("Name: ", db_list[number][0])
         st.write("Ethereum Account Address: ", db_list[number][1])
         st.write("Property Specifications: ", db_list[number][2])
         st.write("Rate per Ether: ", db_list[number][3], "eth")
+        st.text("=============================================================")
         st.text(" \n")
 
 ################################################################################
