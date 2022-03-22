@@ -1,8 +1,8 @@
 # P3_Property Finder
 
 ## Executive Summary
-DML develops a Property Finder application for customers to Rent or Buy property, utilising cryptocurrency accepted transactions
-Additional goals: Connecting various learning modules learnt in course
+- DML develops a Property Finder application for customers to Rent or Buy property, utilising cryptocurrency accepted transactions
+- Additional goals: Connecting various learning modules learnt in course
 
 ## Main Concept
 Simply pay with Cryptocurrency without additional third party involvements
