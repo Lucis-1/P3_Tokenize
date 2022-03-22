@@ -50,8 +50,11 @@ and owner attacks
 
 ## Streamlit
 **Technologies Utilised:
-- Calendar select
 - Additional Streamlit modules
+- Ganache
+- ABI connecting code
+- testing/troubleshooting
 
-Challenges
-Successes
+## Successes:
+- Completed Initial working prototype
+
